@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pet Social Media</title>
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <header>
+    <h1>Pet Social Media</h1>
+    <nav>
+      <ul>
+        <li><a href="#home">Home</a></li>
+        <li><a href="#login">Login</a></li>
+        <li><a href="#signup">Signup</a></li>
+        <li><a href="#profile">Profile</a></li>
+        <li><a href="#upload">Upload</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <main id="content">
+    <!-- Content of each page will be rendered here based on routes -->
+  </main>
+
+  <footer>
+    <p>&copy; 2024 Pet Social Media</p>
+  </footer>
+
+  <!-- Login Page -->
+  <template id="login-template">
+    <div class="login-form">
+      <h2>Login</h2>
+      <form>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Login</button>
+      </form>
+    </div>
+  </template>
+
+  <!-- Home Page -->
+  <template id="home-template">
+    <h2>Welcome to Pet Social Media</h2>
+    <!-- Display posts, images, etc. -->
+  </template>
+
+  <!-- Signup Page -->
+  <template id="signup-template">
+    <div class="signup-form">
+      <h2>Signup</h2>
+      <form>
+        <input type="text" placeholder="Username" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button type="submit">Signup</button>
+      </form>
+    </div>
+  </template>
+
+  <!-- Profile Page -->
+  <template id="profile-template">
+    <h2>User Profile</h2>
+    <!-- Display user information, posts, etc. -->
+  </template>
+
+  <!-- Upload Page -->
+  <template id="upload-template">
+    <div class="upload-form">
+      <h2>Upload File</h2>
+      <form>
+        <input type="file" accept="image/*" required>
+        <button type="submit">Upload</button>
+      </form>
+    </div>
+  </template>
+
+  <script>
+    // Function to show page content based on hash
+    function showPage() {
+      const hash = window.location.hash.substr(1);
+      const template = document.getElementById(`${hash}-template`);
+      if (template) {
+        const content = document.getElementById('content');
+        content.innerHTML = '';
+        content.appendChild(template.content.cloneNode(true));
+      } else {
+        // Show default page if hash doesn't match any template
+        showDefaultPage();
+      }
+    }
+
+    // Function to show default page (Home)
+    function showDefaultPage() {
+      window.location.hash = 'home';
+      showPage();
+    }
+
+    // Event listener to handle hash changes
+    window.addEventListener('hashchange', showPage);
+
+    // Initial call to show page based on hash
+    showPage();
+  </script>
+</body>
+</html>
